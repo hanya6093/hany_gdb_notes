@@ -130,8 +130,24 @@
 
 `set list/listsize 行数`  设置显示的行数
 
-## 设置程序参数/获取设置参数
+## 设置程序参数/获取参数
 
 `set args xx xx` 
 
-`show args` 
+`show args`
+
+## 多进程调试
+
+多进程是 gdb 默认只跟踪一个进程
+
+- 设置调试父进程或者子进程：`set follow-fork-mode parent/child` 
+  - 查看调试选项 `info follow-fork-mode` 
+- 设置调试模式：`set detach-on-fork on/off` 
+  - 默认为 on ，表示调试当前进程的时候，其他进程继续运行，如果为 off ，调试当前进程时，其他进程在 fork 处被 GDB 挂起
+  - 查看参数：`info detach-on-fork` 
+- 查看调试的进程：`info inferiors` 
+- 切换当前调试的进程：`inferior id`  
+  - id 为查看调试进程时的 id
+- 使进程脱离 GDB 调试：`detach inferiors id` 
+- 移除某个进程： `remove inferiors id` 
+- 杀死某个进程：`kill inferiors id`
