@@ -92,6 +92,12 @@
 
 ## 调试程序方法
 
+`bt` ：打印当前线程的调用栈信息
+
+`return` ：直接返回函数的返回值，不执行后面的代码
+
+`frame num` ：切换到调用栈中 id = num 的帧信息
+
 <img src=".\README.assets\image-20230625155935816.png" alt="image-20230625155935816" style="zoom:67%;" />
 
 ## watch命令
@@ -151,3 +157,21 @@
 - 使进程脱离 GDB 调试：`detach inferiors id` 
 - 移除某个进程： `remove inferiors id` 
 - 杀死某个进程：`kill inferiors id`
+
+## 多线程调试
+
+`info thread` 打印所有线程信息
+
+`thread num` 切换到线程 `id = num` 的线程
+
+## 对 core 文件调试
+
+1、运行产生错误的文件 `gdb app` 
+
+2、输入 `core-file core `  查看错误产生的原因
+
+> 后面的 core 为 app 运行错误产生的文件
+
+注意：普通用户要产生 core 文件，需要使用 `ulimit -c 1024` 将 core 文件大小修改为1024。但是我仍然未成功，可能需要修改`/etc/security/limits.conf ` 中的某个值。
+
+ 
